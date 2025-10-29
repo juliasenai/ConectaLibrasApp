@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "ConecLibrasApp",
+    "slug": "ConecLibrasApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/img/Logo3.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/img/Logo3.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/img/Logo3.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/img/Logo3.png"
+    }
+  }
+}
