@@ -45,7 +45,10 @@ export default function Historico({ navigation }) {
         <Text style={styles.titulo}>Histórico</Text>
       </View>
       <View style={styles.corpo}>
-        <Text style={styles.titulo}>Histórico</Text>
+        <Text style={styles.texto}>Dia 1</Text>
+        <View style={styles.libras}>
+          <Text style={styles.conteudo}>Dia 1</Text>
+        </View>
       </View>
     </View>
   );
@@ -53,48 +56,71 @@ export default function Historico({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
     backgroundColor: "#01283C",
     paddingTop: 50,
     width: "100%",
-    borderWidth: 2, // largura da borda
-    borderColor: "blue", // cor da borda
-    borderRadius: 10, // cantos arredondados
+    // borderWidth: 2, // largura da borda
+    // borderColor: "blue", // cor da borda
+    // borderRadius: 10, // cantos arredondados
   },
   inicio: {
     flexDirection: "row",
     width: "100%",
     alignItems: "center",
-    borderWidth: 2, // largura da borda
-    borderColor: "blue", // cor da borda
-    borderRadius: 10, // cantos arredondados
   },
   titulo: {
     fontSize: 50,
-    marginBottom: 20,
     color: "#fff",
     fontFamily: "titulos",
-    marginTop: 20,
-    borderWidth: 2, // largura da borda
-    borderColor: "blue", // cor da borda
-    borderRadius: 10, // cantos arredondados
+    marginTop: 30,
   },
   botao: {
+    marginTop: 35,
+    paddingLeft: 50,
+  },
+  corpo: {
     backgroundColor: "#000",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    marginTop: 40,
-    height: "80%",
+    height: "100%",
     width: "100%",
-    borderWidth: 2, // largura da borda
-    borderColor: "blue", // cor da borda
-    borderRadius: 10, // cantos arredondados
-  },
-  corpo: {
     marginRight: 20,
-    borderWidth: 2, // largura da borda
-    borderColor: "blue", // cor da borda
-    borderRadius: 10, // cantos arredondados
+    marginTop: 50,
+    // borderWidth: 2, // largura da borda
+    // borderColor: "blue", // cor da borda
+    // borderRadius: 10, // cantos arredondados
+  },
+  texto: {
+    fontSize: 50,
+    marginBottom: 20,
+    color: "#fff",
+    fontFamily: "textos",
+    marginTop: 20,
+    paddingLeft: 50,
+    // borderWidth: 2, // largura da borda
+    // borderColor: "blue", // cor da borda
+    // borderRadius: 10, // cantos arredondados
+  },
+    libras: {
+    fontSize: 50,
+    marginBottom: 20,
+    color: "#fff",
+    fontFamily: "textos",
+    marginTop: 20,
+    paddingLeft: 50,
+    // borderWidth: 2, // largura da borda
+    // borderColor: "blue", // cor da borda
+    // borderRadius: 10, // cantos arredondados
+  },
+    conteudo: {
+    fontSize: 50,
+    marginBottom: 20,
+    color: "#fff",
+    fontFamily: "textos",
+    marginTop: 20,
+    paddingLeft: 50,
+    // borderWidth: 2, // largura da borda
+    // borderColor: "blue", // cor da borda
+    // borderRadius: 10, // cantos arredondados
   },
 });
