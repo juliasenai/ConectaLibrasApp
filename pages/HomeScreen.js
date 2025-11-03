@@ -16,8 +16,8 @@ export default function HomeScreen({ navigation }) {
       });
   };
  const [fontsLoaded] = useFonts({
-    "titulos": require('./assets/fonts/gliker-regular.ttf'),
-    "textos": require('./assets/fonts/sanchez-font.ttf'),
+    "titulos": require('../assets/fonts/gliker-regular.ttf'),
+    "textos": require('../assets/fonts/sanchez-font.ttf'),
   });
 
 if (!fontsLoaded) {
@@ -31,7 +31,7 @@ if (!fontsLoaded) {
   return (
     <View style={styles.container}>
        <Image
-        source={require('./assets/img/Logo2.png')}
+        source={require('../assets/img/Logo2.png')}
         style={styles.imagem}
       />
       <Text style={styles.titulo}>Sua comunicação no Conecta Libras</Text>

@@ -34,8 +34,8 @@ export default function LoginScreen({ navigation }) {
   };
 
   const [fontsLoaded] = useFonts({
-    titulos: require("./assets/fonts/gliker-regular.ttf"),
-    textos: require("./assets/fonts/sanchez-font.ttf"),
+    titulos: require("../assets/fonts/gliker-regular.ttf"),
+    textos: require("../assets/fonts/sanchez-font.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -51,12 +51,12 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.containerImagem}>
         <View style={styles.imagemCaixa1}>
           <Image
-            source={require("./assets/img/circulo1.png")}
+            source={require("../assets/img/circulo1.png")}
             style={styles.imagem1}
           />
         </View>
         <Image
-          source={require("./assets/img/Logo1.png")}
+          source={require("../assets/img/Logo1.png")}
           style={styles.imagem2}
         />
         <Text style={styles.titulo}>Login</Text>
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textDecorationLine: "underline",
   },
-});
+}); 

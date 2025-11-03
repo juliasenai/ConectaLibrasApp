@@ -7,7 +7,8 @@ import LoginScreen from "./LoginScreen";
 import CadastroScreen from "./CadastroScreen";
 import HomeScreen from "./HomeScreen";
 import Principal from "./Principal";
-import BoasVindas from "./BoasVindas";
+import Menu from "./Menu";
+import Historico from "./Historico";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,8 @@ export default function App() {
         <Stack.Screen name="Cadastro" component={CadastroScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Principal" component={Principal} />
-        <Stack.Screen name="BoasVindas" component={BoasVindas} />
+        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="Historico" component={Historico} />
       </Stack.Navigator>
     </NavigationContainer>
   );

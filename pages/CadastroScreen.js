@@ -32,8 +32,8 @@ export default function CadastroScreen({ navigation }) {
   };
 
    const [fontsLoaded] = useFonts({
-      "titulos": require('./assets/fonts/gliker-regular.ttf'),
-      "textos": require('./assets/fonts/sanchez-font.ttf'),
+      "titulos": require('../assets/fonts/gliker-regular.ttf'),
+      "textos": require('../assets/fonts/sanchez-font.ttf'),
     });
   
 if (!fontsLoaded) {
