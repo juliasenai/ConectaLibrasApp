@@ -38,15 +38,6 @@ export default function Menu({ navigation }) {
         alert(error.message);
       });
   };
-  const Historico = () => {
-    signOut(auth)
-      .then(() => {
-        navigation.replace("Historico");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
   const Sair = () => {
     signOut(auth)
       .then(() => {
@@ -74,7 +65,7 @@ export default function Menu({ navigation }) {
           <Text style={styles.tituloUsuario}>Olá, nome de cadastro!</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.historico} onPress={Historico}>
+      <TouchableOpacity style={styles.historico} onPress={() => navigation.navigate("Historico")}>
           <Octicons name="history" size={40} color="#fff" />
         <Text style={styles.textoHist}>Histórico</Text>
       </TouchableOpacity>

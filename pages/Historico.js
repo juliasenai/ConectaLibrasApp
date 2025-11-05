@@ -7,20 +7,12 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
 import { useFonts } from "expo-font";
 import Entypo from "@expo/vector-icons/Entypo";
 
 export default function Historico({ navigation }) {
   const Voltar = () => {
-    signOut(auth)
-      .then(() => {
-        navigation.replace("Menu");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    navigation.goBack();
   };
 
   const [fontsLoaded] = useFonts({
@@ -53,15 +45,13 @@ export default function Historico({ navigation }) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#01283C",
     paddingTop: 50,
     width: "100%",
-    // borderWidth: 2, // largura da borda
-    // borderColor: "blue", // cor da borda
-    // borderRadius: 10, // cantos arredondados
   },
   inicio: {
     flexDirection: "row",
@@ -86,9 +76,6 @@ const styles = StyleSheet.create({
     width: "100%",
     marginRight: 20,
     marginTop: 50,
-    // borderWidth: 2, // largura da borda
-    // borderColor: "blue", // cor da borda
-    // borderRadius: 10, // cantos arredondados
   },
   texto: {
     fontSize: 50,
@@ -97,30 +84,21 @@ const styles = StyleSheet.create({
     fontFamily: "textos",
     marginTop: 20,
     paddingLeft: 50,
-    // borderWidth: 2, // largura da borda
-    // borderColor: "blue", // cor da borda
-    // borderRadius: 10, // cantos arredondados
   },
-    libras: {
+  libras: {
     fontSize: 50,
     marginBottom: 20,
     color: "#fff",
     fontFamily: "textos",
     marginTop: 20,
     paddingLeft: 50,
-    // borderWidth: 2, // largura da borda
-    // borderColor: "blue", // cor da borda
-    // borderRadius: 10, // cantos arredondados
   },
-    conteudo: {
+  conteudo: {
     fontSize: 50,
     marginBottom: 20,
     color: "#fff",
     fontFamily: "textos",
     marginTop: 20,
     paddingLeft: 50,
-    // borderWidth: 2, // largura da borda
-    // borderColor: "blue", // cor da borda
-    // borderRadius: 10, // cantos arredondados
   },
 });

@@ -1,35 +1,32 @@
 //Principal
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { useFonts } from "expo-font";
-import Feather from '@expo/vector-icons/Feather';
+import Feather from "@expo/vector-icons/Feather";
 
 export default function Principal({ navigation }) {
-  
   const handlePrincipal = () => {
-      signOut(auth)
-        .then(() => {
-          navigation.replace("Menu"); 
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    };
+    navigation.navigate("Menu");
+  };
 
   const [fontsLoaded] = useFonts({
-    "titulos": require("../assets/fonts/gliker-regular.ttf"),
-    "textos": require("../assets/fonts/sanchez-font.ttf"),
+    titulos: require("../assets/fonts/gliker-regular.ttf"),
+    textos: require("../assets/fonts/sanchez-font.ttf"),
   });
 
-if (!fontsLoaded) {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <ActivityIndicator size="large" color="#4C7DFF" />
-    </View>
-  );
-}
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#4C7DFF" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -40,6 +37,7 @@ if (!fontsLoaded) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

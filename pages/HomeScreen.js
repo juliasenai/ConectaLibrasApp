@@ -1,37 +1,37 @@
 // HomeScreen.js
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator,} from "react-native";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { useFonts } from 'expo-font';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from "react-native";
+import { useFonts } from "expo-font";
 
 export default function HomeScreen({ navigation }) {
   const handleIntro = () => {
-    signOut(auth)
-      .then(() => {
-        navigation.replace("Principal"); // vai pra página principal
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    navigation.replace("Principal");
   };
- const [fontsLoaded] = useFonts({
-    "titulos": require('../assets/fonts/gliker-regular.ttf'),
-    "textos": require('../assets/fonts/sanchez-font.ttf'),
+
+  const [fontsLoaded] = useFonts({
+    titulos: require("../assets/fonts/gliker-regular.ttf"),
+    textos: require("../assets/fonts/sanchez-font.ttf"),
   });
 
-if (!fontsLoaded) {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <ActivityIndicator size="large" color="#4C7DFF" />
-    </View>
-  );
-}
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#4C7DFF" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-       <Image
-        source={require('../assets/img/Logo2.png')}
+      <Image
+        source={require("../assets/img/Logo2.png")}
         style={styles.imagem}
       />
       <Text style={styles.titulo}>Sua comunicação no Conecta Libras</Text>
@@ -46,6 +46,7 @@ if (!fontsLoaded) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#01283C",
   },
-  imagem:{
-    width: '100%', 
+  imagem: {
+    width: "100%",
     height: 400,
     marginBottom: 20,
   },
@@ -62,16 +63,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginBottom: 20,
     color: "#fff",
-    fontFamily: "titulos",   
-    textAlign: 'center',
-  
+    fontFamily: "titulos",
+    textAlign: "center",
   },
   texto: {
     fontSize: 25,
     marginBottom: 15,
     color: "#fff",
-    fontFamily: "textos", 
-    textAlign: 'center',
+    fontFamily: "textos",
+    textAlign: "center",
+    paddingHorizontal: 20,
   },
   botao: {
     backgroundColor: "#FFBE1D",
@@ -82,6 +83,6 @@ const styles = StyleSheet.create({
   textoBotao: {
     color: "#01283C",
     fontSize: 25,
-    fontFamily: "titulos",    
+    fontFamily: "titulos",
   },
 });

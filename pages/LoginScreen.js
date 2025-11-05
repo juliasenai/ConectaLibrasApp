@@ -85,9 +85,8 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.textoBotao}>Vamos começar!</Text>
       </TouchableOpacity>
       <View style={styles.containerCadastro}>
-        <Text style={styles.textoBotao}>Não tem uma conta?</Text>
+        <Text style={styles.textoSimples}>Não tem uma conta?</Text>
         <TouchableOpacity
-          style={styles.botao}
           onPress={() => navigation.navigate("Cadastro")}
         >
           <Text style={styles.textoBotao2}>Criar uma conta!</Text>
@@ -172,6 +171,13 @@ const styles = StyleSheet.create({
     fontFamily: "titulos",
     textAlign: "center",
   },
+  textoSimples: {
+    color: "#01283C",
+    fontSize: 16,
+    fontFamily: "textos",
+    textAlign: "center",
+    marginBottom: 10,
+  },
   textoBotao2: {
     color: "#01283C",
     fontSize: 18,
@@ -179,4 +185,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textDecorationLine: "underline",
   },
-}); 
+});
