@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/img/Logo3.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.juliasenai.ConecLibrasApp"
     },
     "web": {
       "favicon": "./assets/img/Logo3.png"
