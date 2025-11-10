@@ -1,4 +1,4 @@
-//Cadastro
+// CadastroScreen.js
 import React, { useState } from "react";
 import {
   View,
@@ -8,6 +8,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
+  Image,
+  ImageBackground,
 } from "react-native";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
@@ -54,48 +56,62 @@ export default function CadastroScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Cadastro</Text>
+      {/* View com imagem de fundo */}
+      <View style={styles.containerImagem}>
+        <View style={styles.imagemCaixa1}>
+          <Image
+            source={require("../assets/img/circulo1.png")}
+            style={styles.imagem1}
+          />
+        </View>
+        <Image
+          source={require("../assets/img/Logo1.png")}
+          style={styles.imagem2}
+        />
+        <Text style={styles.titulo}>Login</Text>
+      </View>
 
-      <View>
-        <Text style={styles.textoCampo}>Nome:</Text>
+      {/* Campos do formulário */}
+      <View style={styles.form}>
+        <Text style={styles.label}>Nome</Text>
         <TextInput
           placeholder="Nome"
+          placeholderTextColor="#999"
           value={nome}
           onChangeText={setNome}
           style={styles.input}
         />
-      </View>
 
-      <View>
-        <Text style={styles.textoCampo}>Email:</Text>
+        <Text style={styles.label}>Email</Text>
         <TextInput
           placeholder="Email"
+          placeholderTextColor="#999"
           value={email}
           onChangeText={setEmail}
           autoCapitalize="none"
           style={styles.input}
         />
-      </View>
 
-      <View>
-        <Text style={styles.textoCampo}>Senha:</Text>
+        <Text style={styles.label}>Senha</Text>
         <TextInput
-          placeholder="Senha"
+          placeholder="6 dígitos"
+          placeholderTextColor="#999"
           value={senha}
           onChangeText={setSenha}
           secureTextEntry
           style={styles.input}
         />
+
+        <TouchableOpacity style={styles.botao} onPress={handleCadastro}>
+          <Text style={styles.textoBotao}>Registre-se</Text>
+        </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.botao} onPress={handleCadastro}>
-        <Text style={styles.textoBotao}>Cadastrar</Text>
-      </TouchableOpacity>
-
-      <View style={styles.containerVoltar}>
+      {/* Rodapé com link de login */}
+      <View style={styles.footer}>
         <Text style={styles.textoSimples}>Já tem uma conta?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.textoBotao2}>Fazer login!</Text>
+          <Text style={styles.linkLogin}>Entrar</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -105,67 +121,87 @@ export default function CadastroScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    backgroundColor: "white",
+  },
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
     backgroundColor: "#fff",
-    paddingHorizontal: 20,
+  },
+  containerImagem: {
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    height: 403,
+  },
+  imagemCaixa1: {
+    alignItems: "center",
+    width: 500,
+    height: 500,
+    position: "relative",
+  },
+  imagem1: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+  },
+  imagem2: {
+    position: "absolute",
+     width: 230,
+    height: 230,
+    marginTop: 50,
   },
   titulo: {
-    fontSize: 40,
-    marginBottom: 40,
-    textAlign: "center",
-    color: "#01283C",
+    color: "#fff",
+    fontSize: 30,
     fontFamily: "titulos",
+    marginTop: 10,
+  },
+  form: {
+    marginTop: 25,
+    paddingHorizontal: 25,
+  },
+  label: {
+    color: "#01283C",
+    fontSize: 28,
+    fontFamily: "titulos",
+    marginBottom: 5,
   },
   input: {
-    marginBottom: 20,
-    borderBottomWidth: 1,
-    padding: 8,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#419EBD",
-    marginBottom: 10,
-    marginHorizontal: 10,
+    borderWidth: 1.3,
+    borderColor: "#A7C7E7",
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 15,
+    backgroundColor: "#fff",
     fontFamily: "textos",
-    borderRadius: 15,
-  },
-  textoCampo: {
-    color: "#01283C",
     fontSize: 20,
-    fontFamily: "titulos",
-    marginBottom: 10,
-    marginTop: 10,
-    marginHorizontal: 20,
   },
   botao: {
     backgroundColor: "#FFBE1D",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 8,
-    marginHorizontal: 10,
+    borderRadius: 16,
+    paddingVertical: 18,
     marginTop: 10,
   },
   textoBotao: {
-    color: "#01283C",
-    fontSize: 18,
-    fontFamily: "titulos",
     textAlign: "center",
+    fontSize: 26,
+    fontFamily: "titulos",
+    color: "#01283C",
   },
-  containerVoltar: {
+  footer: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 25,
   },
   textoSimples: {
     color: "#01283C",
     fontSize: 16,
     fontFamily: "textos",
-    textAlign: "center",
-    marginBottom: 10,
   },
-  textoBotao2: {
-    color: "#01283C",
+  linkLogin: {
+    color: "#419EBD",
     fontSize: 18,
     fontFamily: "titulos",
-    textAlign: "center",
     textDecorationLine: "underline",
+    marginTop: 5,
   },
 });

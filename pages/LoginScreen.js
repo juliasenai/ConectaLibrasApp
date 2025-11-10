@@ -61,7 +61,7 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.form}>
         <Text style={styles.label}>Email</Text>
         <TextInput
-          placeholder="@HumptyDumpty"
+          placeholder="Seu email"
           placeholderTextColor="#999"
           value={email}
           onChangeText={setEmail}
@@ -71,7 +71,7 @@ export default function LoginScreen({ navigation }) {
 
         <Text style={styles.label}>Senha</Text>
         <TextInput
-          placeholder="********"
+          placeholder="Senha"
           placeholderTextColor="#999"
           value={senha}
           onChangeText={setSenha}
@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: "#01283C",
     alignItems: "center",
-    borderBottomLeftRadius: 300,
-    borderBottomRightRadius: 300,
+    borderBottomLeftRadius: 370,
+    borderBottomRightRadius: 370,
     paddingTop: 50,
     paddingBottom: 30,
   },
@@ -173,22 +173,24 @@ const styles = StyleSheet.create({
   botao: {
     backgroundColor: "#FFBE1D",
     borderRadius: 16,
-    paddingVertical: 20,
+    paddingVertical: 15,
     marginTop: 10,
   },
   textoBotao: {
     textAlign: "center",
-    fontSize: 29,
+    fontSize: 36,
     fontFamily: "titulos",
     color: "#01283C",
   },
   orContainer: {
     alignItems: "center",
     marginVertical: 10,
+    marginTop:40,
+    marginBottom:15,
   },
   orText: {
     fontFamily: "titulos",
-    fontSize: 16,
+    fontSize: 27,
     color: "#999",
   },
   socialContainer: {
@@ -198,21 +200,21 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   socialIcon: {
-    width: 45,
-    height: 45,
+    width: 65,
+    height: 65,
   },
   footer: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 25,
   },
   textoSimples: {
     color: "#01283C",
-    fontSize: 16,
+    fontSize: 27,
     fontFamily: "textos",
   },
   linkCadastro: {
     color: "#419EBD",
-    fontSize: 16,
+    fontSize: 25,
     fontFamily: "titulos",
     textDecorationLine: "underline",
     marginTop: 5,
