@@ -92,19 +92,19 @@ const styles = StyleSheet.create({
   },
   imagem: {
     width: "100%",
-    height: 400,
+    height: 810,
     marginBottom: 20,
   },
   titulo: {
-    fontSize: 30,
+    fontSize: 40,
     marginBottom: 20,
     color: "#fff",
     fontFamily: "titulos",
     textAlign: "center",
   },
   texto: {
-    fontSize: 25,
-    marginBottom: 15,
+    fontSize: 32,
+    marginBottom: 30,
     color: "#fff",
     fontFamily: "textos",
     textAlign: "center",

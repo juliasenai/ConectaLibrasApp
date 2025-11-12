@@ -13,7 +13,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { db } from "../firebase"; // <-- importa sua conexão Firebase
+import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function Historico({ navigation }) {
@@ -31,13 +31,17 @@ export default function Historico({ navigation }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const docRef = doc(db, "conectaBD", "conversas", "1"); 
-        // 🔹 estrutura: conectaBD > conversas > 1
+        const docRef = doc(db, "conversas", "1");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setConteudo(docSnap.data().conteudo);
-          setAtualizadoEm(docSnap.data().atualizadoEm);
+          const data = docSnap.data();
+          setConteudo(data.conteudo);
+          setAtualizadoEm(
+            data.atualizadoEm
+              ? new Date(data.atualizadoEm.seconds * 1000).toLocaleString("pt-BR")
+              : ""
+          );
         } else {
           console.log("Documento não encontrado!");
         }
@@ -53,7 +57,7 @@ export default function Historico({ navigation }) {
 
   if (!fontsLoaded || loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#4C7DFF" />
       </View>
     );
@@ -61,7 +65,7 @@ export default function Historico({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Cabeçalho */}
+      {/* 🔹 Cabeçalho fixo */}
       <View style={styles.inicio}>
         <TouchableOpacity style={styles.botao} onPress={Voltar}>
           <Entypo name="chevron-small-left" size={70} color="#fff" />
@@ -69,94 +73,134 @@ export default function Historico({ navigation }) {
         <Text style={styles.titulo}>Histórico</Text>
       </View>
 
-      {/* Corpo com Scroll */}
-      <ScrollView style={styles.corpo} showsVerticalScrollIndicator={false}>
-        <Text style={styles.diaTitulo}>{atualizadoEm}</Text>
+      {/* 🔹 Corpo com Scroll */}
+      <View style={styles.corpoContainer}>
+        <ScrollView
+          style={styles.scrollArea}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        >
+          <Text style={styles.diaTitulo}>{atualizadoEm}</Text>
 
-        <View style={styles.item}>
-          <FontAwesome6 name="hands" size={24} color="#fff" />
-          <Text style={styles.itemTexto}>(10 primeiras palavras da frase)</Text>
-        </View>
-        <View style={styles.linha} />
+          {/* Item 1 - Tradução para Libras */}
+          <View style={styles.item}>
+            <FontAwesome6 name="hands" size={35} color="#fff" />
+            <Text style={styles.itemTexto}>
+              Hoje o dia foi tão corrido que mal consegui almoçar.
+            </Text>
+          </View>
 
-        <View style={styles.item}>
-          <Feather name="volume-2" size={24} color="#fff" />
-          <Text style={styles.itemTexto}>(10 primeiras palavras da frase)</Text>
-        </View>
-        <View style={styles.linha} />
+          {/* Item 2 - Áudio reproduzido */}
+          <View style={styles.item}>
+            <Feather name="volume-2" size={35} color="#fff" />
+            <Text style={styles.itemTexto}>
+              Você viu aquele filme novo que estreou no cinema?
+            </Text>
+          </View>
 
-        <View style={styles.item}>
-          <MaterialIcons name="keyboard" size={24} color="#fff" />
-          <Text style={styles.itemTexto}>{conteudo}</Text>
-        </View>
-        <View style={styles.linha} />
+          {/* Item 3 - Texto digitado (vem do Firestore) */}
+          <View style={styles.item}>
+            <MaterialIcons name="keyboard" size={35} color="#fff" />
+            <Text style={styles.itemTexto}>
+              {conteudo ? conteudo : "(sem conteúdo)"}
+            </Text>
+          </View>
 
+          <View style={styles.linha} />
+        </ScrollView>
+      </View>
+
+      {/* 🔹 Rodapé fixo */}
+      <View style={styles.rodapeContainer}>
         <Text style={styles.rodape}>CONECTA LIBRAS</Text>
-      </ScrollView>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  // ======== Estrutura base ========
   container: {
     flex: 1,
     backgroundColor: "#01283C",
-    paddingTop: 50,
     width: "100%",
+    paddingTop: 50,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  // ======== Cabeçalho fixo ========
   inicio: {
     flexDirection: "row",
-    width: "100%",
     alignItems: "center",
+    paddingHorizontal: 30,
+    marginBottom: 10,
+  },
+  botao: {
+    marginTop: 35,
+    paddingLeft: 20,
   },
   titulo: {
     fontSize: 50,
     color: "#fff",
     fontFamily: "titulos",
     marginTop: 30,
+    marginLeft: 10,
   },
-  botao: {
-    marginTop: 35,
-    paddingLeft: 50,
-  },
-  corpo: {
+
+  // ======== Corpo com Scroll ========
+  corpoContainer: {
+    flex: 1,
     backgroundColor: "#000",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    flex: 1,
-    width: "100%",
-    marginTop: 50,
+    marginTop: 20,
+    overflow: "hidden",
+  },
+  scrollArea: {
     padding: 30,
   },
   diaTitulo: {
-    fontSize: 32,
-    color: "#fff",
+    fontSize: 40,
+    color: "#FFBE1D",
     fontFamily: "textos",
     marginBottom: 20,
+    marginLeft: 40,
+    fontWeight: "100",
   },
   item: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 30,
+    marginLeft: 40,
   },
   itemTexto: {
     color: "#fff",
-    fontSize: 18,
-    marginLeft: 15,
+    fontSize: 28.4,
+    marginLeft: 25,
     fontFamily: "textos",
     flexShrink: 1,
   },
   linha: {
-    height: 1,
-    backgroundColor: "#333",
-    width: "100%",
-    marginVertical: 10,
+    height: 2,
+    backgroundColor: "#848484ff",
+    width: "90%",
+    alignSelf: "center",
+    marginTop: 40,
+    marginBottom: 50,
+  },
+
+  // ======== Rodapé fixo ========
+  rodapeContainer: {
+    paddingVertical: 15,
+    alignItems: "center",
   },
   rodape: {
-    textAlign: "center",
     color: "#fff",
     fontFamily: "textos",
-    fontSize: 14,
-    marginTop: 30,
+    fontSize: 21,
   },
 });

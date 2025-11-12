@@ -1,4 +1,4 @@
-//Menu
+// Menu.js
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -8,9 +8,8 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import { auth, db } from "../firebase"; // 🔹 Certifique-se de exportar o db no firebase.js
-import { signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { auth } from "../firebase";
+import { signOut, onAuthStateChanged, reload } from "firebase/auth";
 import { useFonts } from "expo-font";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
@@ -25,28 +24,26 @@ export default function Menu({ navigation }) {
     textos: require("../assets/fonts/sanchez-font.ttf"),
   });
 
-  // 🔹 Buscar o nome do usuário no Firestore
+  // 🔹 Buscar o nome do usuário do Firebase Authentication
   useEffect(() => {
-    const fetchUserName = async () => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       try {
-        const user = auth.currentUser;
         if (user) {
-          const userRef = doc(db, "Usuários", user.uid); // caminho: conectaBD -> Usuários-> UID
-          const docSnap = await getDoc(userRef);
-          if (docSnap.exists()) {
-            setUserName(docSnap.data().nome); // nome cadastrado
-          } else {
-            console.log("Documento não encontrado!");
-          }
+          await reload(user); // garante dados atualizados
+          console.log("Usuário autenticado:", user.displayName); // 🔹 teste
+          setUserName(user.displayName || "usuário");
+        } else {
+          setUserName("Visitante");
         }
       } catch (error) {
         console.log("Erro ao buscar nome do usuário:", error);
+        setUserName("usuário");
       } finally {
         setLoadingName(false);
       }
-    };
+    });
 
-    fetchUserName();
+    return unsubscribe;
   }, []);
 
   if (!fontsLoaded || loadingName) {
@@ -92,6 +89,7 @@ export default function Menu({ navigation }) {
             source={require("../assets/img/Conta.png")}
             style={styles.imgusuario}
           />
+          {/* 🔹 Exibe o nome cadastrado no Firebase Authentication */}
           <Text style={styles.tituloUsuario}>
             Olá, {userName ? userName : "usuário"}!
           </Text>
