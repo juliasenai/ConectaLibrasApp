@@ -9,9 +9,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useFonts } from "expo-font";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { app } from "../firebase"; // <-- importa tua config do Firebase
+import { auth } from "../firebase";
+import { onAuthStateChanged, reload } from "firebase/auth";
 
 export default function HomeScreen({ navigation }) {
   const [fontsLoaded] = useFonts({
@@ -19,28 +18,27 @@ export default function HomeScreen({ navigation }) {
     textos: require("../assets/fonts/sanchez-font.ttf"),
   });
 
-  const [userName, setUserName] = useState(""); // guarda o nome do usuário
+  const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
   useEffect(() => {
+    // 🔹 Observa o usuário logado e obtém o nome salvo no Authentication
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // pega o documento do usuário no Firestore
-        const docRef = doc(db, "usuarios", user.uid); // muda "usuarios" se teu nome da coleção for outro
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          setUserName(docSnap.data().nome || "Usuário");
+      try {
+        if (user) {
+          // força recarregar dados atualizados (garante pegar displayName recente)
+          await reload(user);
+          console.log("Nome do usuário logado:", user.displayName); // 🔹 TESTE
+          setUserName(user.displayName || "Usuário");
         } else {
-          setUserName("Usuário");
+          setUserName("Visitante");
         }
-      } else {
-        setUserName("Visitante");
+      } catch (error) {
+        console.log("Erro ao buscar nome do usuário:", error);
+        setUserName("Usuário");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return unsubscribe;
@@ -64,6 +62,8 @@ export default function HomeScreen({ navigation }) {
         source={require("../assets/img/Logo2.png")}
         style={styles.imagem}
       />
+
+      {/* 🔹 Exibe o nome salvo no Firebase Authentication */}
       <Text style={styles.titulo}>Olá, {userName}!</Text>
 
       <Text style={styles.texto}>
